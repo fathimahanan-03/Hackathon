@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Age Estimator - Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1 class="dashboard-title">Welcome to Age Estimator</h1>
+    <button class="logout-btn" onclick="window.location.href='index.php'">Logout</button>
+  </header>
+
+  <div class="options-container">
+    <!-- Upload Image -->
+    <div class="option-card circle" onclick="openImageModal()">
+      <img src="assets/upload.png" alt="Upload Image">
+      <span>Upload Image</span>
+    </div>
+
+    <!-- Real-time Face Detection -->
+    <div class="option-card circle" onclick="openCameraModal()">
+      <img src="assets/face.png" alt="Real-time Detection">
+      <span>Real-Time Face Detection</span>
+    </div>
+
+    <!-- Upload Voice -->
+    <div class="option-card circle" onclick="openAudioModal()">
+      <img src="assets/mic.png" alt="Upload Voice">
+      <span>Upload Voice</span>
+    </div>
+
+    <!-- Real-time Voice Detection -->
+    <div class="option-card circle" onclick="openVoiceModal()">
+      <img src="assets/realtime.png" alt="Real-time Voice">
+      <span>Real-Time Voice Detection</span>
+    </div>
+  </div>
+
+  <!-- Hidden Inputs -->
+  <input type="file" id="imageUpload" accept="image/*" style="display:none">
+  <input type="file" id="audioUpload" accept="audio/*" style="display:none">
+
+  <!-- Image Upload Modal -->
+  <!-- Image Upload Modal -->
+<div id="imageModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeImageModal()">&times;</span>
+    <h2>Upload Image</h2>
+    <input type="file" id="imagePicker" accept="image/*" onchange="previewImage(event)">
+    <img id="uploadedImg" style="display:none; margin-top:15px; border-radius:10px;">
+  </div>
+</div>
+
+
+  <!-- Camera Modal -->
+  <div id="cameraModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeCameraModal()">&times;</span>
+      <h2>Real-Time Face Detection</h2>
+      <video id="camera" autoplay playsinline></video>
+      <canvas id="capturedPhoto" style="display:none;"></canvas>
+      <div id="cameraControls">
+        <button onclick="capturePhoto()">📸 Capture Photo</button>
+      </div>
+      <div id="retryControls" style="display:none;">
+        <button onclick="retryCamera()">🔄 Try Again</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio Upload Modal -->
+  <div id="audioModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeAudioModal()">&times;</span>
+      <h2>Upload Audio</h2>
+      <input type="file" id="audioPicker" accept="audio/*" onchange="previewAudio(event)">
+      <audio id="uploadedAudio" controls style="display:none; margin-top:15px;"></audio>
+    </div>
+  </div>
+
+  <!-- Voice Recording Modal -->
+  <div id="voiceModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeVoiceModal()">&times;</span>
+      <h2>Recording Voice...</h2>
+      <p id="countdown">7</p>
+      <audio id="audioPlayer" controls style="display:none;"></audio>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

@@ -42,28 +42,41 @@
   <input type="file" id="audioUpload" accept="audio/*" style="display:none">
 
   <!-- Image Upload Modal -->
-  <!-- Image Upload Modal -->
-<div id="imageModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeImageModal()">&times;</span>
-    <h2>Upload Image</h2>
-    <input type="file" id="imagePicker" accept="image/*" onchange="previewImage(event)">
-    <img id="uploadedImg" style="display:none; margin-top:15px; border-radius:10px;">
-  </div>
-</div>
+  <div id="imageModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeImageModal()">&times;</span>
+      <h2>Upload Image</h2>
 
+      <label>Single Image:</label>
+      <input type="file" id="imagePicker" accept="image/*" onchange="previewImage(event)">
+      <img id="uploadedImg" style="display:none; margin-top:15px; border-radius:10px;">
+
+      <br><br>
+
+      <label>Multiple Images:</label>
+      <input type="file" id="multiImagePicker" accept="image/*" multiple onchange="previewMultipleImages(event)">
+      <div id="multiUploadedImgs" style="display:flex; flex-wrap:wrap; gap:10px; margin-top:15px;"></div>
+
+      <br><br>
+      <button onclick="submitImages()">✅ Submit</button>
+    </div>
+  </div>
 
   <!-- Camera Modal -->
   <div id="cameraModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeCameraModal()">&times;</span>
       <h2>Real-Time Face Detection</h2>
-      <video id="camera" autoplay playsinline></video>
-      <canvas id="capturedPhoto" style="display:none;"></canvas>
-      <div id="cameraControls">
+
+      <div id="cameraContainer">
+        <video id="camera" autoplay playsinline></video>
         <button onclick="capturePhoto()">📸 Capture Photo</button>
       </div>
-      <div id="retryControls" style="display:none;">
+
+      <div id="capturedContainer" style="display:none;">
+        <img id="capturedImage" style="max-width:100%; border-radius:10px; margin-top:10px;">
+        <br>
+        <button onclick="submitCapturedPhoto()">✅ Submit</button>
         <button onclick="retryCamera()">🔄 Try Again</button>
       </div>
     </div>
@@ -74,8 +87,19 @@
     <div class="modal-content">
       <span class="close" onclick="closeAudioModal()">&times;</span>
       <h2>Upload Audio</h2>
+
+      <label>Single Audio:</label>
       <input type="file" id="audioPicker" accept="audio/*" onchange="previewAudio(event)">
       <audio id="uploadedAudio" controls style="display:none; margin-top:15px;"></audio>
+
+      <br><br>
+
+      <label>Multiple Audios:</label>
+      <input type="file" id="multiAudioPicker" accept="audio/*" multiple onchange="previewMultipleAudios(event)">
+      <div id="multiUploadedAudios" style="margin-top:15px;"></div>
+
+      <br><br>
+      <button onclick="submitAudios()">✅ Submit</button>
     </div>
   </div>
 
@@ -83,9 +107,16 @@
   <div id="voiceModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeVoiceModal()">&times;</span>
-      <h2>Recording Voice...</h2>
-      <p id="countdown">7</p>
-      <audio id="audioPlayer" controls style="display:none;"></audio>
+      <h2>Real-Time Voice Detection</h2>
+      <div id="voiceControls">
+        <button onclick="startRecording()">🎙 Start Recording</button>
+        <button onclick="stopRecording()" style="display:none;">⏹ Stop Recording</button>
+      </div>
+      <div id="recordedContainer" style="display:none; margin-top:15px;">
+        <audio id="audioPlayer" controls></audio>
+        <br>
+        <button onclick="submitVoice()">✅ Submit</button>
+      </div>
     </div>
   </div>
 
